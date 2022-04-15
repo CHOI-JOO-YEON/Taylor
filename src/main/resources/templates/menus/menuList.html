@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><meta http-equiv="refresh" content="5"></head> // 5초마다 새로고침
+<body>
+<div class="container">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>이름</th>
+        <th>가격</th>
+        <th>판매상태</th>
+        <th>재고</th>
+        <th>HOT/ICE</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="menu : ${menus}">
+        <td th:text="${menu.id}"></td>
+        <td th:text="${menu.name}"></td>
+        <td th:text="${menu.price}"></td>
+        <td th:text="${menu.sales_status}"></td>
+        <td th:text="${menu.stock}"></td>
+        <td th:text="${menu.temp}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
