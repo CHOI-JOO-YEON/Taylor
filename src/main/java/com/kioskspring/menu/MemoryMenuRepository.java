@@ -8,10 +8,10 @@ import java.util.*;
 public class MemoryMenuRepository implements MenuRepository{
 
 
-    private static Map<Long, Menu> cafe = new HashMap<>();
+    private static Map<Integer, Menu> cafe = new HashMap<>();
 
 
-    private static long sequence = 0L;
+    private static int sequence = 0;
 
 
     @Override
@@ -22,7 +22,7 @@ public class MemoryMenuRepository implements MenuRepository{
     }
 
     @Override
-    public Optional<Menu> findById(Long id) {
+    public Optional<Menu> findById(int id) {
 
         return Optional.ofNullable(cafe.get(id));
     }

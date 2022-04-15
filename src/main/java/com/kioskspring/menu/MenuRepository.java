@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MenuRepository {
     Menu save(Menu menu);
-    Optional<Menu> findById(Long id);
+    Optional<Menu> findById(int id);
     Optional<Menu> findByName(String name,String temp);
     List<Menu> findAll();
 

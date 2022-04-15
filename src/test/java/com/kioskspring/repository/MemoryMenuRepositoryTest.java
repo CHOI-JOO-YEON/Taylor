@@ -27,7 +27,7 @@ public class MemoryMenuRepositoryTest {
         menu.setName("아메리카노");
         menu.setTemp("ICE");
         //when
-        Long saveId = menuService.add(menu);
+        int saveId = menuService.add(menu);
 
         //then
         Menu findMenu = menuRepository.findById(saveId).get();

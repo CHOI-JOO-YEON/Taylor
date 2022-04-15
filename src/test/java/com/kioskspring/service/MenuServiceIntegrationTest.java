@@ -28,7 +28,7 @@ public class MenuServiceIntegrationTest {
         Menu menu = new Menu();
         menu.setName("아메리카노");
 
-        Long saveId = menuService.add(menu);
+        int saveId = menuService.add(menu);
 
         Menu fineMenu = menuRepository.findById(saveId).get();
 

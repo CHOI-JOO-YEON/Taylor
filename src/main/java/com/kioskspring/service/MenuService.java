@@ -16,7 +16,7 @@ public class MenuService {
         this.menuRepository = menuRepository;
     }
 
-    public Long add(Menu menu) {
+    public Integer add(Menu menu) {
         validateDuplicateMenu(menu);
         menuRepository.save(menu);
         return menu.getId();
@@ -33,7 +33,7 @@ public class MenuService {
         return menuRepository.findAll();
     }
 
-    public Optional<Menu> findOne(Long menuId){
+    public Optional<Menu> findOne(int menuId){
         return menuRepository.findById(menuId);
     }
 }

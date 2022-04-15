@@ -21,7 +21,7 @@ public class JpaMenuRepository implements MenuRepository {
     }
 
     @Override
-    public Optional<Menu> findById(Long id) {
+    public Optional<Menu> findById(int id) {
         Menu menu = entityManager.find(Menu.class, id);
         return Optional.ofNullable(menu);
     }
