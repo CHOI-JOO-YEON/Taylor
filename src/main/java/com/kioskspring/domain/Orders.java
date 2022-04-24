@@ -2,9 +2,7 @@ package com.kioskspring.domain;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -18,13 +16,12 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderKey;
     private int orderId;
-    private int orderValue;
-    private int orderMenu;
+    private int menuId;
+    private int value;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:MI:SS")
-    private Date orderDate;
+    private Date date;
     private int age;
     private String gender;
-
 
     public int getOrderKey() {
         return orderKey;
@@ -42,28 +39,28 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public int getOrderValue() {
-        return orderValue;
+    public int getMenuId() {
+        return menuId;
     }
 
-    public void setOrderValue(int orderValue) {
-        this.orderValue = orderValue;
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
     }
 
-    public int getOrderMenu() {
-        return orderMenu;
+    public int getValue() {
+        return value;
     }
 
-    public void setOrderMenu(int id) {
-        this.orderMenu = id;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getAge() {

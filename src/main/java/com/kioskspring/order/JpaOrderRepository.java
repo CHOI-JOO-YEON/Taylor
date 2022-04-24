@@ -20,13 +20,19 @@ public class JpaOrderRepository implements OrderRepository {
 
     @Override
     public int getTime(int startAge, int endAge, String gender, int orderMenu) {
-        List<Orders> result = em.createQuery("select o from Orders o",Orders.class).getResultList();
+
+       long result = em.createQuery("select sum(o.value) from Orders o",Long.class).getSingleResult();
+//       int result = em.createQuery("select sum(o.value) from Orders o where o.age between :startAge and :endAge and o.menuId = :orderMenu and " +
+//                "o.gender = :gender  ").setParameter("startAge", startAge).setParameter("endAge", endAge).
+//                setParameter("orderMenu", orderMenu).setParameter("gender", gender).getFirstResult();
+
+
+//        List<Orders> result = em.createQuery("select o from Orders o",Orders.class).getResultList();
 
 //        List<Orders> result = em.createQuery("select sum(o.orderValue) from Orders o where o.age between :startAge and :endAge and o.orderMenu = :orderMenu and " +
 //                "o.gender = :gender  ",Orders.class).setParameter("startAge", startAge).setParameter("endAge", endAge).
 //                setParameter("orderMenu", orderMenu).setParameter("gender", gender).getResultList();
         System.out.println(result);
-        System.out.println(em.createQuery("select o.orderId from Orders o",Orders.class).getResultList());
 
         return 0;
     }
