@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -8,22 +9,22 @@
     <table border = "1" bordercolor="black">
       <thead>
       <tr>
-        <th>주문번호</th>
-        <th>메뉴 키</th>
-        <th>주문 개수</th>
-        <th>시간</th>
-        <th>연령</th>
-        <th>성별</th>
+        <th>#</th>
+        <th>이름</th>
+        <th>가격</th>
+        <th>판매상태</th>
+        <th>재고</th>
+        <th>HOT/ICE</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="order : ${orders}">
-        <td th:text="${order.orderid}"></td>
-        <td th:text="${order.ordermenu}"></td>
-        <td th:text="${order.ordervalue}"></td>
-        <td th:text="${order.orderdate}"></td>
-        <td th:text="${order.age}"></td>
-        <td th:text="${order.gender}"></td>
+      <tr th:each="menu : ${menus}">
+        <td th:text="${menu.id}"></td>
+        <td th:text="${menu.name}"></td>
+        <td th:text="${menu.price}"></td>
+        <td th:text="${menu.sales_status}"></td>
+        <td th:text="${menu.stock}"></td>
+        <td th:text="${menu.temp}"></td>
       </tr>
       </tbody>
     </table>

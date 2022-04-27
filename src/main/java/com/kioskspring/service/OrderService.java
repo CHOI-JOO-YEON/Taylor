@@ -1,7 +1,10 @@
 package com.kioskspring.service;
 
+import com.kioskspring.domain.Orders;
 import com.kioskspring.order.OrderRepository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 public class OrderService {
@@ -12,7 +15,11 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public int getTime(int startAge,int endAge, String gender,int orderMenu) {
+    public long getTime(int startAge,int endAge, String gender,int orderMenu) {
         return orderRepository.getTime(startAge, endAge, gender, orderMenu);
+    }
+
+    public List<Orders> findOrders() {
+        return orderRepository.findAll();
     }
 }

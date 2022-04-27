@@ -19,7 +19,7 @@ public class OrderRepositoryTest {
 
     @Test
     public void checkOrderTime() {
-        int time = orderService.getTime(20,30,"MALE",1);
+        long time = orderService.getTime(20,30,"MALE",100);
         System.out.println(time);
 
     }
