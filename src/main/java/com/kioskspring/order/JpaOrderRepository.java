@@ -21,19 +21,22 @@ public class JpaOrderRepository implements OrderRepository {
 
     @Override
     public long getTime(int startAge, int endAge, String gender, int orderMenu) {
+        long result = 0L;
+        Long temp = 0L;
+        if(gender.equals("UNKNOWN"))
+        {
+             temp= em.createQuery("select sum(o.value) from Orders o where o.age between :startAge and :endAge and o.menuId = :orderMenu"
+                            ,Long.class).setParameter("startAge", startAge).setParameter("endAge", endAge).
+                    setParameter("orderMenu", orderMenu).getSingleResult();
 
+        }else{
+            temp = em.createQuery("select sum(o.value) from Orders o where o.age between :startAge and :endAge and o.menuId = :orderMenu and " +
+                            "o.gender = :gender  ",Long.class).setParameter("startAge", startAge).setParameter("endAge", endAge).
+                    setParameter("orderMenu", orderMenu).setParameter("gender", gender).getSingleResult();
 
-       long result = em.createQuery("select sum(o.value) from Orders o where o.age between :startAge and :endAge and o.menuId = :orderMenu and " +
-                "o.gender = :gender  ",Long.class).setParameter("startAge", startAge).setParameter("endAge", endAge).
-                setParameter("orderMenu", orderMenu).setParameter("gender", gender).getSingleResult();
+        }
 
-
-//        List<Orders> result = em.createQuery("select o from Orders o",Orders.class).getResultList();
-
-//        List<Orders> result = em.createQuery("select sum(o.orderValue) from Orders o where o.age between :startAge and :endAge and o.orderMenu = :orderMenu and " +
-//                "o.gender = :gender  ",Orders.class).setParameter("startAge", startAge).setParameter("endAge", endAge).
-//                setParameter("orderMenu", orderMenu).setParameter("gender", gender).getResultList();
-        System.out.println(result);
+        result = temp==null?0L:temp;
 
         return result;
     }

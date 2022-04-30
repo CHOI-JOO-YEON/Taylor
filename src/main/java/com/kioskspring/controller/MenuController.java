@@ -32,6 +32,7 @@ public class MenuController {
         menu.setPrice(form.getPrice());
         menu.setStock(1000L);
         menu.setSales_status(true);
+        menu.setCategory(form.getCategory());
         menuService.add(menu);
         return "redirect:/";
     }

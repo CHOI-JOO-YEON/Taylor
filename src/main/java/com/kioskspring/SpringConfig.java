@@ -2,8 +2,11 @@ package com.kioskspring;
 
 import com.kioskspring.menu.JpaMenuRepository;
 import com.kioskspring.menu.MenuRepository;
+import com.kioskspring.menu_rank.JpaMenuRankRepository;
+import com.kioskspring.menu_rank.MenuRankRepository;
 import com.kioskspring.order.JpaOrderRepository;
 import com.kioskspring.order.OrderRepository;
+import com.kioskspring.service.MenuRankService;
 import com.kioskspring.service.MenuService;
 import com.kioskspring.service.OrderService;
 import org.springframework.context.annotation.Bean;
@@ -44,4 +47,16 @@ public class SpringConfig {
     public OrderRepository orderRepository() {
         return new JpaOrderRepository(entityManager);
     }
+
+    @Bean
+    public MenuRankService menuRankService() {
+        return new MenuRankService(menuRankRepository());
+    }
+
+    @Bean
+    public MenuRankRepository menuRankRepository() {
+        return new JpaMenuRankRepository(entityManager);
+    }
+
+
 }

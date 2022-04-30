@@ -8,13 +8,24 @@ import javax.persistence.Id;
 
 @Entity
 public class Menu {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private Long price;
     private Boolean sales_status;
     private Long stock;
     private String temp;
+    private String category;
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public int getId() {
         return id;

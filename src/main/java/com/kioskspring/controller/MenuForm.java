@@ -25,6 +25,16 @@ public class MenuForm {
         this.temp = temp;
     }
 
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    private String category;
     private String name;
     private Long price;
     private String temp;
