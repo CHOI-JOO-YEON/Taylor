@@ -148,4 +148,42 @@ public class JpaMenuRankRepository implements MenuRankRepository {
     public List<MenuRank> getRank() {
         return entityManager.createQuery("select mR from MenuRank mR", MenuRank.class).getResultList();
     }
+
+    @Override
+    public HashMap<Integer, Integer> getSpecialRank(int age, String gender) {
+        String s = "total";
+
+        if(age>=40)
+        {
+            s="old";
+        }else if(age<40)
+        {
+            s="young";
+        }
+
+        if(gender.equals("male"))
+        {
+            s += "Male";
+        }else if(gender.equals("female"))
+        {
+            s += "Female";
+        }
+        System.out.println("s = " + s);
+        HashMap<Integer,Integer> result = new HashMap<>();
+        Long max = entityManager.createQuery("select count(mR)from MenuRank mR",Long.class).getResultList().get(0);
+        System.out.println("max = " + max);
+
+        for (int i = 1; i <= max ; i++) {
+            result.put(i,entityManager.createQuery("select mR.youngMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getResultList().get(0));
+
+        }
+
+        for (int i = 1; i <= max ; i++) {
+            System.out.println("{"+i+", "+result.get(i) +"}");
+
+        }
+
+        return result;
+
+    }
 }

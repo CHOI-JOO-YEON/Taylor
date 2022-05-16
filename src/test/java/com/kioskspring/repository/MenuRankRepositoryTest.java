@@ -12,10 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
-
+@Transactional
 public class MenuRankRepositoryTest {
     @Autowired
     MenuRankService menuRankService;
@@ -46,6 +47,16 @@ public class MenuRankRepositoryTest {
     @Test
     public void totalRank() {
         List<MenuRank> menuRanks= menuRankService.totalRank();
+        for (MenuRank menuRank : menuRanks) {
+            System.out.println(menuRank.getMenuId() + " " +menuRank.getTotal());
+        }
+    }
+    @Test
+    public void specialRank() {
+        HashMap<Integer, Integer> result = new HashMap<>();
+        result= menuRankService.getSpecialRank(25,"male");
+        System.out.println("result = " + result);
+
 
     }
 }

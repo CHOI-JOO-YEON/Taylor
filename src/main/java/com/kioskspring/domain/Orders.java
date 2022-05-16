@@ -1,6 +1,7 @@
 package com.kioskspring.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -18,8 +19,8 @@ public class Orders {
     private int orderId;
     private int menuId;
     private int value;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MI:SS")
-    private Date date;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:MI:SS")
+//    private Date date;
     private int age;
     private String gender;
 
@@ -53,14 +54,6 @@ public class Orders {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public int getAge() {

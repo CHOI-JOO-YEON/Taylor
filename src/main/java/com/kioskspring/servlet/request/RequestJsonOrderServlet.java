@@ -3,6 +3,8 @@ package com.kioskspring.servlet.request;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kioskspring.domain.Menu;
+import com.kioskspring.domain.Orders;
+import org.hibernate.criterion.Order;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -28,14 +30,15 @@ public class RequestJsonOrderServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletInputStream inputStream = request.getInputStream();
-
-
-        List<Menu> menuList =  objectMapper.readValue(inputStream, new TypeReference<List<Menu>>() {
+        List<Orders> orders = objectMapper.readValue(inputStream, new TypeReference<List<Orders>>() {
             @Override
             public Type getType() {
                 return super.getType();
             }
         });
+        for (Orders order : orders) {
+            System.out.println("order.getOrderId() = " + order.getOrderId());
+        }
 
     }
 }
