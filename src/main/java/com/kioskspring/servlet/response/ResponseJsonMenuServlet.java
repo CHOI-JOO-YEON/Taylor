@@ -51,4 +51,5 @@ public class ResponseJsonMenuServlet extends HttpServlet {
         String json = new Gson().toJson(list);
         response.getWriter().write(json);
     }
+
 }
