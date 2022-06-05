@@ -17,13 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
-class TempReq {
-    int age;
-    String gender;
-}
 
 @CrossOrigin
 @WebServlet(name = "responseJsonMenuServlet", urlPatterns = "/response-json")
@@ -40,7 +39,7 @@ public class ResponseJsonMenuServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
 //
@@ -50,6 +49,8 @@ public class ResponseJsonMenuServlet extends HttpServlet {
         List<ResponseMenu> list = responseMenuService.findResponse(age, gender);
         String json = new Gson().toJson(list);
         response.getWriter().write(json);
+        System.out.println("나이 = " + age + " 성별 = " + gender);
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초")));
     }
 
 }

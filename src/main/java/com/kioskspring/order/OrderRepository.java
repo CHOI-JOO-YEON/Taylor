@@ -9,6 +9,7 @@ public interface OrderRepository {
     Orders save(Orders orders);
     long getTime(int startAge, int endAge, String gender, int orderMenu);
     List<Orders> findAll();
+    int getMaxId();
 
 
 

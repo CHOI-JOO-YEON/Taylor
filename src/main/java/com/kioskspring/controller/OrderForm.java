@@ -1,36 +1,11 @@
-package com.kioskspring.domain;
+package com.kioskspring.controller;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-
-
-@Entity
-@Table(name = "orders")
-public class Orders {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderKey;
+public class OrderForm {
     private int orderId;
     private int menuId;
     private int value;
-    private Timestamp orderTime;
     private int age;
     private String gender;
-
-    public int getOrderKey() {
-        return orderKey;
-    }
-
-    public void setOrderKey(int orderKey) {
-        this.orderKey = orderKey;
-    }
 
     public int getOrderId() {
         return orderId;
@@ -70,13 +45,5 @@ public class Orders {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Timestamp getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(Timestamp orderTime) {
-        this.orderTime = orderTime;
     }
 }

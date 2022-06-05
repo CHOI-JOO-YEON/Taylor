@@ -5,7 +5,6 @@ import com.kioskspring.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 public class JpaMenuRankRepository implements MenuRankRepository {
@@ -168,20 +167,18 @@ public class JpaMenuRankRepository implements MenuRankRepository {
         {
             s += "Female";
         }
-        System.out.println("s = " + s);
         HashMap<Integer,Integer> result = new HashMap<>();
         Long max = entityManager.createQuery("select count(mR)from MenuRank mR",Long.class).getResultList().get(0);
-        System.out.println("max = " + max);
+
 
         for (int i = 1; i <= max ; i++) {
-            result.put(i,entityManager.createQuery("select mR.youngMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getResultList().get(0));
+            int temp = entityManager.createQuery("select mR.youngMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            //온도가 높을 때, 온도가 낮을 때, 비가 올 때, 눈이 올 때
+            //아침, 점심, 밤
+            result.put(i, temp);
 
         }
 
-        for (int i = 1; i <= max ; i++) {
-            System.out.println("{"+i+", "+result.get(i) +"}");
-
-        }
 
         return result;
 

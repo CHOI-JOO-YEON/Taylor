@@ -11,7 +11,7 @@ public interface MenuRankRepository {
     void setRank(String ageGender);
     List<MenuRank> totalRank();
     List<MenuRank> getRank();
-    HashMap<Integer,Integer> getSpecialRank(int age, String gender);
+    HashMap<Integer, Integer> getSpecialRank(int age, String gender);
 
 
 }

@@ -58,7 +58,6 @@ public class JpaResponseMenuRepository implements ResponseMenuRepository{
             k.setSales_status(m.get(i).getSales_status());
             k.setStock(m.get(i).getStock());
             k.setTemp(m.get(i).getTemp());
-            System.out.println("k.getId() = " + k.getId());
             k.setSequence(map.get(k.getId()));
             r.add(k);
         }
