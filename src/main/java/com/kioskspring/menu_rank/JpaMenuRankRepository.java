@@ -38,26 +38,22 @@ public class JpaMenuRankRepository implements MenuRankRepository {
     public void setRank(String ageGender) {
 
         List<MenuRank> result = entityManager.createQuery("select mR from MenuRank mR", MenuRank.class).getResultList();
-        int startAge = 0;
-        int endAge = 100;
+        int startAge = 15;
+        int endAge = 45;
         String gender = "UNKNOWN";
 
         switch (ageGender)
         {
             case "youngMale":
-                endAge = 40;
                 gender = "MALE";
                 break;
             case "youngFemale":
-                endAge = 40;
                 gender = "FEMALE";
                 break;
-            case "oleMale":
-                startAge = 41;
+            case "oldMale":
                 gender = "MALE";
                 break;
             case "oldFemale":
-                startAge = 41;
                 gender = "FEMALE";
                 break;
         }
@@ -67,18 +63,33 @@ public class JpaMenuRankRepository implements MenuRankRepository {
         int finalEndAge = endAge;
         String finalGender = gender;
         Collections.sort(result, new Comparator<MenuRank>() {
-
             @Override
             public int compare(MenuRank o1, MenuRank o2) {
-                if (orderService.getTime(finalStartAge, finalEndAge, finalGender, o1.getMenuId())
-                        < orderService.getTime(finalStartAge, finalEndAge, finalGender, o2.getMenuId())) {
-                    return 1;
-                } else if (orderService.getTime(finalStartAge, finalEndAge, finalGender, o1.getMenuId())
-                        > orderService.getTime(finalStartAge, finalEndAge, finalGender, o2.getMenuId())) {
-                    return -1;
-                } else {
-                    return 0;
-
+                if(ageGender.charAt(0)=='o')
+                {
+                    if (orderService.getTime(0, 14, finalGender, o1.getMenuId())+
+                            orderService.getTime(46, 100, finalGender, o1.getMenuId())
+                            <orderService.getTime(0, 14, finalGender, o2.getMenuId())+
+                            orderService.getTime(46, 100, finalGender, o2.getMenuId())) {
+                        return 1;
+                    } else if (orderService.getTime(0, 14, finalGender, o1.getMenuId())+
+                            orderService.getTime(46, 100, finalGender, o1.getMenuId())
+                            >orderService.getTime(0, 14, finalGender, o2.getMenuId())+
+                            orderService.getTime(46, 100, finalGender, o2.getMenuId())) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }else{
+                    if (orderService.getTime(finalStartAge, finalEndAge, finalGender, o1.getMenuId())
+                            < orderService.getTime(finalStartAge, finalEndAge, finalGender, o2.getMenuId())) {
+                        return 1;
+                    } else if (orderService.getTime(finalStartAge, finalEndAge, finalGender, o1.getMenuId())
+                            > orderService.getTime(finalStartAge, finalEndAge, finalGender, o2.getMenuId())) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                 }
 
             }
@@ -99,7 +110,7 @@ public class JpaMenuRankRepository implements MenuRankRepository {
 
                 }
                 break;
-            case "oleMale":
+            case "oldMale":
                 for (int i = 1; i < result.size(); i++) {
                     result.get(target++).setOldMale(i);
 
@@ -152,10 +163,10 @@ public class JpaMenuRankRepository implements MenuRankRepository {
     public HashMap<Integer, Integer> getSpecialRank(int age, String gender) {
         String s = "total";
 
-        if(age>=40)
+        if(age<15 ||age>45)
         {
             s="old";
-        }else if(age<40)
+        }else
         {
             s="young";
         }
@@ -172,7 +183,23 @@ public class JpaMenuRankRepository implements MenuRankRepository {
 
 
         for (int i = 1; i <= max ; i++) {
-            int temp = entityManager.createQuery("select mR.youngMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            int temp;
+            if(s.equals("youngFemale"))
+            {
+                temp = entityManager.createQuery("select mR.youngFemale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            }else if(s.equals("youngMale"))
+            {
+                temp = entityManager.createQuery("select mR.youngMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            }else if(s.equals("oldMale"))
+            {
+                temp = entityManager.createQuery("select mR.oldMale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            }else
+            {
+                temp = entityManager.createQuery("select mR.oldFemale from MenuRank mR where mR.menuId = :i",Integer.class).setParameter("i",i).getSingleResult();
+            }
+
+
+
             //온도가 높을 때, 온도가 낮을 때, 비가 올 때, 눈이 올 때
             //아침, 점심, 밤
             result.put(i, temp);

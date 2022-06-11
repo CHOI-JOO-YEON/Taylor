@@ -32,10 +32,10 @@ public class JpaResponseMenuRepository implements ResponseMenuRepository{
 
         String s = "total";
 
-        if(age>=40)
+        if(age<15||age>45)
         {
             s="old_";
-        }else if(age<40)
+        }else
         {
             s="young_";
         }
